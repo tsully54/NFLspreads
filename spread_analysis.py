@@ -57,7 +57,6 @@ ax22.legend()
 
 st.pyplot(fig22)
 
-st.header("Various spread Records for 2023, 2022 and previous 20 years")
 
 
 ################## OVER/UNDERS ##################
@@ -148,6 +147,13 @@ fav_results_st_df.index = ['2023', '2022', 'Last 20 years']
 fav_results_st_df['win_pct'] = fav_results_st_df['win'] / (fav_results_st_df['win'] + fav_results_st_df['loss'])
 st.subheader("Favorites Straight Up")
 st.dataframe(fav_results_st_df)
+
+################## HOME TEAM WINNING MARGIN ##################
+score_diff_season = pd.DataFrame(games.groupby('schedule_season')['score_diff'].mean())
+st.subheader("Avg. Home Team Winning Margin")
+st.bar_chart(data=score_diff_season)
+
+
 
 ################## HOME TEAMS STRAIGHT UP ##################
 # Calculate how home teams have done straight up for each season
@@ -363,3 +369,6 @@ home_dog_results_sp_df['cover_pct'] = home_dog_results_sp_df['win'] / (home_dog_
 
 st.subheader("Home Underdogs Against the Spread")
 st.dataframe(home_dog_results_sp_df)
+
+
+
