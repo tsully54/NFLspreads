@@ -21,4 +21,4 @@
 
 ### Deployment
 #### streamlit was used to publish site that can easily show case spread analysis from multiple angles
-- https://nflspreads-lc4hrufarp6mydt65gk55s.streamlit.app/
+- [https://nflspreads-lc4hrufarp6mydt65gk55s.streamlit.app/](https://nflspreads-lc4hrufarp6mydt65gk55s.streamlit.app/)
