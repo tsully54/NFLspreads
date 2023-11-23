@@ -212,7 +212,7 @@ home_results_sp = home_results_sp[::-1]
 home_results_sp_2yrs = home_results_sp.loc[[2023, 2022]]
 home_results_sp_sum = home_results_sp.sum()
 home_results_sp_df = pd.concat([home_results_sp_2yrs, home_results_sp_sum.to_frame().T])
-home_results_sp_df.index = ['2022', '2023', 'Last 20 years']
+home_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 home_results_sp_df['cover_pct'] = home_results_sp_df['win'] / (home_results_sp_df['win'] + home_results_sp_df['loss'])
 
 st.subheader("Home Teams Against the Spread")
@@ -250,7 +250,7 @@ home_fav_results_st = home_fav_results_st[::-1]
 home_fav_results_st_2yrs = home_fav_results_st.loc[[2023, 2022]]
 home_fav_results_st_sum = home_fav_results_st.sum()
 home_fav_results_st_df = pd.concat([home_fav_results_st_2yrs, home_fav_results_st_sum.to_frame().T])
-home_fav_results_st_df.index = ['2022', '2023', 'Last 20 years']
+home_fav_results_st_df.index = ['2023', '2022', 'Last 20 years']
 home_fav_results_st_df['win_pct'] = home_fav_results_st_df['win'] / (home_fav_results_st_df['win'] + home_fav_results_st_df['loss'])
 
 st.subheader("Home Favorites Straight Up")
@@ -288,7 +288,7 @@ home_fav_results_sp = home_fav_results_sp[::-1]
 home_fav_results_sp_2yrs = home_fav_results_sp.loc[[2023, 2022]]
 home_fav_results_sp_sum = home_fav_results_sp.sum()
 home_fav_results_sp_df = pd.concat([home_fav_results_sp_2yrs, home_fav_results_sp_sum.to_frame().T])
-home_fav_results_sp_df.index = ['2022', '2023', 'Last 20 years']
+home_fav_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 home_fav_results_sp_df['cover_pct'] = home_fav_results_sp_df['win'] / (home_fav_results_sp_df['win'] + home_fav_results_sp_df['loss'])
 
 st.subheader("Home Favorites Against the Spread")
@@ -326,7 +326,7 @@ home_dog_results_st = home_dog_results_st[::-1]
 home_dog_results_st_2yrs = home_dog_results_st.loc[[2023, 2022]]
 home_dog_results_st_sum = home_dog_results_st.sum()
 home_dog_results_st_df = pd.concat([home_dog_results_st_2yrs, home_dog_results_st_sum.to_frame().T])
-home_dog_results_st_df.index = ['2022', '2023', 'Last 20 years']
+home_dog_results_st_df.index = ['2023', '2022', 'Last 20 years']
 home_dog_results_st_df['win_pct'] = home_dog_results_st_df['win'] / (home_dog_results_st_df['win'] + home_dog_results_st_df['loss'])
 
 st.subheader("Home Underdogs Straight Up")
@@ -369,6 +369,40 @@ home_dog_results_sp_df['cover_pct'] = home_dog_results_sp_df['win'] / (home_dog_
 
 st.subheader("Home Underdogs Against the Spread")
 st.dataframe(home_dog_results_sp_df)
+
+
+################## COVER PERCENTAGE BY TEAM ##################
+#calculate how teams have done relative to spread
+team_spreads23 = pd.DataFrame(df23['spread_winner'].value_counts())
+team_loss23 = pd.DataFrame(df23['spread_loser'].value_counts())
+team_spreads23['spread_loser'] = team_loss23['spread_loser']
+
+# Count the number of PUSH games for each team
+push_count_home_23 = df23[df23['spread_winner'] == 'PUSH']['team_home'].value_counts()
+push_count_away_23 = df23[df23['spread_loser'] == 'PUSH']['team_away'].value_counts()
+# Combine the counts for home and away teams
+push_count_total_23 = round(push_count_home_23.add(push_count_away_23, fill_value=0))
+push_dict_23 = push_count_total_23.to_dict()
+team_spreads23 = team_spreads23.drop('PUSH')
+team_spreads23['PUSH'] = team_spreads23.index.map(push_dict_23)
+team_spreads23['PUSH'] = team_spreads23['PUSH'].fillna(0).astype(int)
+team_spreads23['cover_pct'] = team_spreads23['spread_winner'] / (team_spreads23['spread_winner']+team_spreads23['spread_loser'])
+
+st.header("Cover percentage by team 2023")
+
+st.dataframe(team_spreads23)
+
+
+################## OVER UNDER BY TEAM ##################
+home_ou23 = pd.crosstab(df23['team_home'],df23['over_under_winner'])
+away_ou23 = pd.crosstab(df23['team_away'],df23['over_under_winner'])
+ou23 = home_ou23.add(away_ou23)
+ou23 = ou23.reindex(columns=['OVER', 'UNDER', 'PUSH'])
+ou23['over_pct'] = ou23['OVER'] / (ou23['OVER']+ou23['UNDER'])
+ou23 = ou23.sort_values(by='over_pct', ascending=False)
+st.header("Over/Under percentage by team 2023")
+
+st.dataframe(ou23)
 
 
 
