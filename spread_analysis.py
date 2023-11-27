@@ -376,9 +376,12 @@ st.dataframe(home_dog_results_sp_df)
 #calculate how teams have done relative to spread
 team_spreads23 = pd.DataFrame(df23['spread_winner'].value_counts())
 team_loss23 = pd.DataFrame(df23['spread_loser'].value_counts())
+st.write(team_spreads23.columns)
+st.write(team_loss23.columns)
 
-team_spreads23.get('spread_loser', default=0)
-team_spreads23['spread_loser'] = team_loss23['spread_loser']
+team_spreads23['spread_loser'] = 3
+
+#team_spreads23['spread_loser'] = team_loss23['spread_loser']
 
 # Count the number of PUSH games for each team
 push_count_home_23 = df23[df23['spread_winner'] == 'PUSH']['team_home'].value_counts()
