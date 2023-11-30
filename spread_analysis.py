@@ -18,27 +18,27 @@ season_dfs = {}
 for year in games['schedule_season']:
     season_dfs[f'games{year}']= games[games['schedule_season']==year]
 
-st.header("Weekly Averages of Score Totals vs Over/Under Lines")
+#st.header("Weekly Averages of Score Totals vs Over/Under Lines")
 #plot avg. score totals vs. avg over/under line for last two years
 #2023
 #calculate average over/under by week
-st.subheader("2023")
+#st.subheader("2023")
 df23 = season_dfs['games2023']
 ou_week23 = pd.DataFrame(df23.groupby('schedule_week')['over_under_line'].mean())
 tot_week23 = pd.DataFrame(df23.groupby('schedule_week')['score_total'].mean())
 ou_week23['avg_total'] = tot_week23['score_total']
 
 # Create a Matplotlib figure and axis
-fig, ax = plt.subplots(figsize=(4, 3))
-ax.plot(ou_week23.index, ou_week23['over_under_line'], label='Over/Under 2023', color='blue')
-ax.plot(ou_week23.index, ou_week23['avg_total'], label='Average Total 2023', color='red')
-ax.set_xlabel('Schedule Week')
-ax.set_ylabel('Average')
-ax.set_title('Weekly Averages for Over/Under and Score Totals in 2023')
-ax.legend()
+#fig, ax = plt.subplots(figsize=(4, 3))
+#ax.plot(ou_week23.index, ou_week23['over_under_line'], label='Over/Under 2023', color='blue')
+#ax.plot(ou_week23.index, ou_week23['avg_total'], label='Average Total 2023', color='red')
+#ax.set_xlabel('Schedule Week')
+#ax.set_ylabel('Average')
+#ax.set_title('Weekly Averages for Over/Under and Score Totals in 2023')
+#ax.legend()
 
-st.pyplot(fig)
-st.subheader("2022")
+#st.pyplot(fig)
+#st.subheader("2022")
 #2022
 #calculate average over/under by week
 df22 = season_dfs['games2022']
@@ -47,15 +47,15 @@ tot_week22 = pd.DataFrame(df22.groupby('schedule_week')['score_total'].mean())
 ou_week22['avg_total'] = tot_week22['score_total']
 
 # Create a Matplotlib figure and axis
-fig22, ax22 = plt.subplots(figsize=(4, 3))
-ax22.plot(ou_week22.index, ou_week22['over_under_line'], label='Over/Under 2022', color='blue')
-ax22.plot(ou_week22.index, ou_week22['avg_total'], label='Average Total 2022', color='red')
-ax22.set_xlabel('Schedule Week')
-ax22.set_ylabel('Average')
-ax22.set_title('Weekly Averages for Over/Under and Score Totals in 2022')
-ax22.legend()
+#fig22, ax22 = plt.subplots(figsize=(4, 3))
+#ax22.plot(ou_week22.index, ou_week22['over_under_line'], label='Over/Under 2022', color='blue')
+#ax22.plot(ou_week22.index, ou_week22['avg_total'], label='Average Total 2022', color='red')
+#ax22.set_xlabel('Schedule Week')
+#ax22.set_ylabel('Average')
+#ax22.set_title('Weekly Averages for Over/Under and Score Totals in 2022')
+#ax22.legend()
 
-st.pyplot(fig22)
+#st.pyplot(fig22)
 
 
 
@@ -90,8 +90,8 @@ over_under_sum = over_under_results.sum()
 over_under_df = pd.concat([recent_years, over_under_sum.to_frame().T])
 over_under_df.index = ['2023', '2022', 'Last 20 years']
 over_under_df['over_pct'] = over_under_df['over'] / (over_under_df['over']+over_under_df['under'])
-st.subheader("Over/Unders")
-st.dataframe(over_under_df)
+#st.subheader("Over/Unders")
+#st.dataframe(over_under_df)
 
 
 
@@ -120,8 +120,8 @@ fav_results_sp_sum = fav_results_sp.sum()
 fav_results_sp_df = pd.concat([fav_results_sp_2yrs, fav_results_sp_sum.to_frame().T])
 fav_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 fav_results_sp_df['cover_pct'] = fav_results_sp_df['win'] / (fav_results_sp_df['win']+fav_results_sp_df['loss'])
-st.subheader("Favorites against the spread")
-st.dataframe(fav_results_sp_df)
+#st.subheader("Favorites against the spread")
+#st.dataframe(fav_results_sp_df)
 
 ################## FAVORITES STRAIGHT UP ##################
 # Calculate how favorites have done straight up for each season
@@ -145,13 +145,13 @@ fav_results_st_sum = fav_results_st.sum()
 fav_results_st_df = pd.concat([fav_results_st_2yrs, fav_results_st_sum.to_frame().T])
 fav_results_st_df.index = ['2023', '2022', 'Last 20 years']
 fav_results_st_df['win_pct'] = fav_results_st_df['win'] / (fav_results_st_df['win'] + fav_results_st_df['loss'])
-st.subheader("Favorites Straight Up")
-st.dataframe(fav_results_st_df)
+#st.subheader("Favorites Straight Up")
+#st.dataframe(fav_results_st_df)
 
 ################## HOME TEAM WINNING MARGIN ##################
 score_diff_season = pd.DataFrame(games.groupby('schedule_season')['score_diff'].mean())
-st.subheader("Avg. Home Team Winning Margin")
-st.bar_chart(data=score_diff_season)
+#st.subheader("Avg. Home Team Winning Margin")
+#st.bar_chart(data=score_diff_season)
 
 
 
@@ -179,8 +179,8 @@ home_results_st_df = pd.concat([home_results_st_2yrs, home_results_st_sum.to_fra
 home_results_st_df.index = ['2023', '2022', 'Last 20 years']
 home_results_st_df['win_pct'] = home_results_st_df['win'] / (home_results_st_df['win'] + home_results_st_df['loss'])
 
-st.subheader("Home Teams Straight Up")
-st.dataframe(home_results_st_df)
+#st.subheader("Home Teams Straight Up")
+#st.dataframe(home_results_st_df)
 
 ################## HOME TEAMS AGAINST THE SPREAD ##################
 
@@ -215,8 +215,8 @@ home_results_sp_df = pd.concat([home_results_sp_2yrs, home_results_sp_sum.to_fra
 home_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 home_results_sp_df['cover_pct'] = home_results_sp_df['win'] / (home_results_sp_df['win'] + home_results_sp_df['loss'])
 
-st.subheader("Home Teams Against the Spread")
-st.dataframe(home_results_sp_df)
+#st.subheader("Home Teams Against the Spread")
+#st.dataframe(home_results_sp_df)
 
 ################## HOME FAVORITES STRAIGHT UP ##################
 
@@ -253,8 +253,8 @@ home_fav_results_st_df = pd.concat([home_fav_results_st_2yrs, home_fav_results_s
 home_fav_results_st_df.index = ['2023', '2022', 'Last 20 years']
 home_fav_results_st_df['win_pct'] = home_fav_results_st_df['win'] / (home_fav_results_st_df['win'] + home_fav_results_st_df['loss'])
 
-st.subheader("Home Favorites Straight Up")
-st.dataframe(home_fav_results_st_df)
+#st.subheader("Home Favorites Straight Up")
+#st.dataframe(home_fav_results_st_df)
 
 ################## HOME FAVORITES AGAINST THE SPREAD ##################
 
@@ -291,8 +291,8 @@ home_fav_results_sp_df = pd.concat([home_fav_results_sp_2yrs, home_fav_results_s
 home_fav_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 home_fav_results_sp_df['cover_pct'] = home_fav_results_sp_df['win'] / (home_fav_results_sp_df['win'] + home_fav_results_sp_df['loss'])
 
-st.subheader("Home Favorites Against the Spread")
-st.dataframe(home_fav_results_sp_df)
+#st.subheader("Home Favorites Against the Spread")
+#st.dataframe(home_fav_results_sp_df)
 
 ################## HOME UNDERDOGS STRAIGHT UP ##################
 
@@ -329,8 +329,8 @@ home_dog_results_st_df = pd.concat([home_dog_results_st_2yrs, home_dog_results_s
 home_dog_results_st_df.index = ['2023', '2022', 'Last 20 years']
 home_dog_results_st_df['win_pct'] = home_dog_results_st_df['win'] / (home_dog_results_st_df['win'] + home_dog_results_st_df['loss'])
 
-st.subheader("Home Underdogs Straight Up")
-st.dataframe(home_dog_results_st_df)
+#st.subheader("Home Underdogs Straight Up")
+#st.dataframe(home_dog_results_st_df)
 
 
 ################## HOME UNDERDOGS AGAINST THE SPREAD ##################
@@ -367,8 +367,8 @@ home_dog_results_sp_df = pd.concat([home_dog_results_sp_2yrs, home_dog_results_s
 home_dog_results_sp_df.index = ['2023', '2022', 'Last 20 years']
 home_dog_results_sp_df['cover_pct'] = home_dog_results_sp_df['win'] / (home_dog_results_sp_df['win'] + home_dog_results_sp_df['loss'])
 
-st.subheader("Home Underdogs Against the Spread")
-st.dataframe(home_dog_results_sp_df)
+#st.subheader("Home Underdogs Against the Spread")
+#st.dataframe(home_dog_results_sp_df)
 
 
 
@@ -378,8 +378,7 @@ team_spreads23 = pd.DataFrame(df23['spread_winner'].value_counts())
 team_spreads23.columns = ['spread_winner']
 team_loss23 = pd.DataFrame(df23['spread_loser'].value_counts())
 team_loss23.columns = ['spread_loser']
-st.dataframe(team_spreads23)
-st.write(team_loss23.columns)
+
 
 team_spreads23['spread_loser'] = team_loss23['spread_loser']
 
@@ -393,10 +392,10 @@ team_spreads23 = team_spreads23.drop('PUSH')
 team_spreads23['PUSH'] = team_spreads23.index.map(push_dict_23)
 team_spreads23['PUSH'] = team_spreads23['PUSH'].fillna(0).astype(int)
 team_spreads23['cover_pct'] = team_spreads23['spread_winner'] / (team_spreads23['spread_winner']+team_spreads23['spread_loser'])
+team_spreads23.columns = ['W (ATS)', 'L (ATS)', 'PUSH', 'cover_pct']
+#st.header("Cover percentage by team 2023")
 
-st.header("Cover percentage by team 2023")
-
-st.dataframe(team_spreads23)
+#st.dataframe(team_spreads23)
 
 
 ################## OVER UNDER BY TEAM ##################
@@ -406,9 +405,105 @@ ou23 = home_ou23.add(away_ou23)
 ou23 = ou23.reindex(columns=['OVER', 'UNDER', 'PUSH'])
 ou23['over_pct'] = ou23['OVER'] / (ou23['OVER']+ou23['UNDER'])
 ou23 = ou23.sort_values(by='over_pct', ascending=False)
-st.header("Over/Under percentage by team 2023")
+#st.header("Over/Under percentage by team 2023")
 
-st.dataframe(ou23)
+#st.dataframe(ou23)
 
 
 
+################  STREAMLIT WORK  ##################
+## Team by Team analysis
+st.header("Team-by-Team Analysis 2023")
+st.write("ATS = Against the Spread")
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Cover percentage")
+    st.dataframe(team_spreads23)
+
+with col2: 
+    st.subheader("Over/Under percentage")
+    st.dataframe(ou23)
+
+## cover percentage by team 2023
+#st.header("Cover percentage by team 2023")
+#st.dataframe(team_spreads23)
+
+## Over under by team 2023
+#st.header("Over/Under percentage by team 2023")
+#st.dataframe(ou23)
+
+## over/under history
+st.subheader("Over/Unders")
+st.dataframe(over_under_df)
+
+##plot avg. score totals vs. avg over/under line for last two years
+st.header("Weekly Averages of Score Totals vs Over/Under Lines")
+#2023
+#calculate average over/under by week
+st.subheader("2023")
+# Create a Matplotlib figure and axis
+fig, ax = plt.subplots(figsize=(4, 3))
+ax.plot(ou_week23.index, ou_week23['over_under_line'], label='Over/Under 2023', color='blue')
+ax.plot(ou_week23.index, ou_week23['avg_total'], label='Average Total 2023', color='red')
+ax.set_xlabel('Schedule Week')
+ax.set_ylabel('Average')
+ax.set_title('Weekly Averages for Over/Under and Score Totals in 2023')
+ax.legend()
+
+st.pyplot(fig)
+st.subheader("2022")
+#2022
+# Create a Matplotlib figure and axis
+fig22, ax22 = plt.subplots(figsize=(4, 3))
+ax22.plot(ou_week22.index, ou_week22['over_under_line'], label='Over/Under 2022', color='blue')
+ax22.plot(ou_week22.index, ou_week22['avg_total'], label='Average Total 2022', color='red')
+ax22.set_xlabel('Schedule Week')
+ax22.set_ylabel('Average')
+ax22.set_title('Weekly Averages for Over/Under and Score Totals in 2022')
+ax22.legend()
+st.pyplot(fig22)
+
+
+## Favorites overall
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Favorites ATS")
+    st.dataframe(fav_results_sp_df)
+
+with col2: 
+    st.subheader("Favorites Straight Up")
+    st.dataframe(fav_results_st_df)
+
+## Home teams overall
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Home Teams ATS")
+    st.dataframe(home_results_sp_df)
+
+with col2: 
+    st.subheader("Home Teams Straight Up")
+    st.dataframe(home_results_st_df)
+
+## Home Favorites overall
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Home Favorites ATS")
+    st.dataframe(home_fav_results_sp_df)
+
+with col2: 
+    st.subheader("Home Favorites Straight Up")
+    st.dataframe(home_fav_results_st_df)
+
+## Home Favorites overall
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Home Underdogs ATS")
+    st.dataframe(home_dog_results_sp_df)
+
+with col2: 
+    st.subheader("Home Underdogs Straight Up")
+    st.dataframe(home_dog_results_st_df)
+
+## Home Team Winning Margin 
+st.subheader("Avg. Home Team Winning Margin")
+st.bar_chart(data=score_diff_season)
